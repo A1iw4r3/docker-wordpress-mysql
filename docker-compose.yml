@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_DATABASE: employee
+
+  wordpress:
+    image: wordpress:latest
+    depends_on:
+      - db
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_NAME: employee
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_PASSWORD: user
